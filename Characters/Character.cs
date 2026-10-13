@@ -1,6 +1,6 @@
 ﻿namespace CharacterCreator.Characters
 {
-    // Factory Method Concrete Product
+    // Product Class
     public abstract class Character
     {
         public int Health { get; set; }
@@ -20,17 +20,10 @@
             Agility = agility;
         }
 
-        public virtual void Act()
-        {
-            Console.WriteLine("The character is taking action.");
-        }
+        public abstract void Act();
+        public abstract void Speak();
 
-        public void Speak()
-        {
-            Console.WriteLine("The character is speaking.");
-        }
-
-        public void PrintDetails()
+        public virtual void PrintDetails()
         {
             Console.WriteLine($"Health: {Health}");
             Console.WriteLine($"Defense: {Defense}");
