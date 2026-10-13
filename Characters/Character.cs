@@ -1,6 +1,7 @@
 ﻿namespace CharacterCreator.Characters
 {
-    public class Character : ICharacter
+    // Factory Method Concrete Product
+    public abstract class Character
     {
         public int Health { get; set; }
         public int Defense { get; set; }
@@ -9,7 +10,7 @@
         public int Intellect { get; set; }
         public int Agility { get; set; }
 
-        public Character(int health, int defense, int speed, int strength, int intellect, int agility)
+        protected Character(int health, int defense, int speed, int strength, int intellect, int agility)
         {
             Health = health;
             Defense = defense;
@@ -19,19 +20,24 @@
             Agility = agility;
         }
 
-        public void Act()
+        public virtual void Act()
         {
-
+            Console.WriteLine("The character is taking action.");
         }
 
         public void Speak()
         {
-
+            Console.WriteLine("The character is speaking.");
         }
 
         public void PrintDetails()
         {
-
+            Console.WriteLine($"Health: {Health}");
+            Console.WriteLine($"Defense: {Defense}");
+            Console.WriteLine($"Speed: {Speed}");
+            Console.WriteLine($"Strength: {Strength}");
+            Console.WriteLine($"Intellect: {Intellect}");
+            Console.WriteLine($"Agility: {Agility}");
         }
     }
 }
