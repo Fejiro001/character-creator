@@ -26,6 +26,7 @@
 
         public virtual void PrintDetails()
         {
+            Console.WriteLine($"Name: {Name}");
             Console.WriteLine($"Health: {Health}");
             Console.WriteLine($"Defense: {Defense}");
             Console.WriteLine($"Speed: {Speed}");
