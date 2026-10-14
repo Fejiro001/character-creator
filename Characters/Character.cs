@@ -3,7 +3,7 @@
     // Product Class
     public abstract class Character
     {
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         public int Health { get; set; }
         public int Defense { get; set; }
         public int Speed { get; set; }
