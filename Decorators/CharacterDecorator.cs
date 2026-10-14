@@ -6,7 +6,7 @@ namespace CharacterCreator.Decorators
     {
         protected readonly Character _character;
 
-        public CharacterDecorator(Character character)
+        protected CharacterDecorator(Character character)
             : base(
                   health: character.Health,
                   defense: character.Defense,
@@ -17,12 +17,11 @@ namespace CharacterCreator.Decorators
             )
         {
             _character = character;
+            Name = character.Name;
         }
 
         public override void Act() => _character.Act();
 
         public override void Speak() => _character.Speak();
-
-        public override void PrintDetails() => _character.PrintDetails();
     }
 }
