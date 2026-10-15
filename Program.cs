@@ -220,6 +220,9 @@ namespace CharacterCreator
                     case 4:
                         FilterInventory(character);
                         break;
+                    case 5:
+                        character.Inventory.DisplayInventory();
+                        break;
                     case 0:
                         inventoryMenuRunning = false;
                         break;
