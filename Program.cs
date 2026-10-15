@@ -1,4 +1,5 @@
 ﻿using CharacterCreator.Characters;
+using CharacterCreator.Decorators;
 using CharacterCreator.Factories;
 
 namespace CharacterCreator
@@ -36,6 +37,9 @@ namespace CharacterCreator
                     case CreateCharacterOption:
                         character = CreateCharacter();
                         break;
+                    case CustomizeCharacterOption:
+                        character = CustomizeCharacter(character);
+                        break;
                 }
             }
         }
@@ -69,7 +73,7 @@ namespace CharacterCreator
 
         static Character? CreateCharacter()
         {
-            Console.WriteLine("\n=== Create Character ===");
+            Console.WriteLine("\n=== CREATE CHARACTER ===");
             Console.WriteLine("Choose a character type:");
             Console.WriteLine("1. Human");
             Console.WriteLine("2. Elf");
@@ -109,6 +113,45 @@ namespace CharacterCreator
             }
 
             Console.WriteLine($"{character.Name} the {character.GetType().Name} has been created.");
+            return character;
+        }
+
+        static Character? CustomizeCharacter(Character? character)
+        {
+            if (character == null)
+            {
+                Console.WriteLine("Createe a character first.");
+                return null;
+            }
+
+            Console.WriteLine("\n=== CUSTOMIZE CHARACTER ===");
+            Console.WriteLine("Choose a specialization:");
+            Console.WriteLine("1. Warrior");
+            Console.WriteLine("2. Mage");
+            Console.WriteLine("0. Return");
+
+            if (!int.TryParse(Console.ReadLine()?.Trim(), out int choice))
+            {
+                Console.WriteLine("Invalid input. Please enter a number.");
+                return character;
+            }
+
+            switch (choice)
+            {
+                case 1:
+                    character = new WarriorDecorator(character);
+                    break;
+                case 2:
+                    character = new MageDecorator(character);
+                    break;
+                case 0:
+                    return character;
+                default:
+                    Console.WriteLine("Invalid specialization.");
+                    return character;
+            }
+
+            Console.WriteLine($"{character.Name} has received a specialization.");
             return character;
         }
     }
