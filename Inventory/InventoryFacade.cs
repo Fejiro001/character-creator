@@ -47,5 +47,23 @@
                 Console.WriteLine($"\n'{itemName}' was not found in the inventory.");
             }
         }
+
+        public void GetItemsByCategory(ItemCategory category)
+        {
+            List<Item> items = _inventory.FilterItemsByCategory(category);
+
+            Console.WriteLine($"\n=== {category} Items ===");
+
+            if (items.Count == 0)
+            {
+                Console.WriteLine($"No items found in the {category} category.");
+                return;
+            }
+
+            foreach (Item item in items)
+            {
+                Console.WriteLine($"- {item.Name}: {item.Description}");
+            }
+        }
     }
 }
