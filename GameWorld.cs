@@ -8,7 +8,7 @@
         public string Difficulty { get; set; } = "Normal";
         public int WorldTime { get; private set; } = 1; // Track days
         public string CurrentRegion { get; set; } = "Whispering Woods";
-        public string Weather { get; private set; } = "Clear";
+        public string Weather { get; private set; } = "Clear Skies";
 
         private GameWorld() { }
 
