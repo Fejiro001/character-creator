@@ -44,6 +44,12 @@ namespace CharacterCreator
                     case ViewCharacterOption:
                         ViewCharacter(character);
                         break;
+                    case ManageInventoryOption:
+                        ManageInventory(character);
+                        break;
+                    case WorldSimulationOption:
+                        RunSimulation(character, gameWorld);
+                        break;
                 }
             }
         }
@@ -308,6 +314,53 @@ namespace CharacterCreator
             }
 
             character.Inventory.GetItemsByCategory(category.Value);
+        }
+
+        static void RunSimulation(Character? character, GameWorld gameWorld)
+        {
+            bool simulationRunning = true;
+
+            while (simulationRunning)
+            {
+                Console.WriteLine("\n=== WORLD SIMULATION ===");
+                Console.WriteLine("Select an option:");
+                Console.WriteLine("1. Perform Character Action");
+                Console.WriteLine("2. View World Status");
+                Console.WriteLine("3. Advance Time Manually");
+                Console.WriteLine("0. Return to Main Menu");
+
+                if (!int.TryParse(Console.ReadLine()?.Trim(), out int choice))
+                {
+                    Console.WriteLine("Invalid input. Please enter a number.");
+                    continue;
+                }
+
+                switch (choice)
+                {
+                    case 1:
+                        if (character == null)
+                        {
+                            Console.WriteLine("Create a character before performing an action.");
+                            break;
+                        }
+
+                        character.Act();
+                        gameWorld.AdvanceTime();
+                        break;
+                    case 2:
+                        gameWorld.DisplayWorldStatus();
+                        break;
+                    case 3:
+                        gameWorld.AdvanceTime();
+                        break;
+                    case 0:
+                        simulationRunning = false;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid option.");
+                        break;
+                }
+            }
         }
     }
 }
