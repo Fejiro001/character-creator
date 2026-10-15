@@ -50,6 +50,13 @@ namespace CharacterCreator
                     case WorldSimulationOption:
                         RunSimulation(character, gameWorld);
                         break;
+                    case ExitOption:
+                        gameRunning = false;
+                        Console.WriteLine("Exiting Character Creator Simulator...");
+                        break;
+                    default:
+                        Console.WriteLine("Invalid option. Please select a valid menu option.");
+                        break;
                 }
             }
         }
