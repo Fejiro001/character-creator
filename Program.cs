@@ -213,6 +213,13 @@ namespace CharacterCreator
                         Console.WriteLine("Enter the item you want to use:");
                         character.Inventory.TakeItem(Console.ReadLine() ?? "");
                         break;
+                    case 3:
+                        Console.WriteLine("Enter the item to search for:");
+                        character.Inventory.SearchItem(Console.ReadLine() ?? "");
+                        break;
+                    case 4:
+                        FilterInventory(character);
+                        break;
                     case 0:
                         inventoryMenuRunning = false;
                         break;
@@ -269,6 +276,35 @@ namespace CharacterCreator
             );
 
             character.Inventory.GiveItem(item);
+        }
+
+        static void FilterInventory(Character character)
+        {
+            Console.WriteLine("Categories: 1. Weapon\n 2. Potion\n 3. Spellbook\n 4. HouseItem\n");
+            Console.WriteLine("Choose a category:");
+
+            if (!int.TryParse(Console.ReadLine()?.Trim(), out int choice))
+            {
+                Console.WriteLine("Invalid category.");
+                return;
+            }
+
+            ItemCategory? category = choice switch
+            {
+                1 => ItemCategory.Weapon,
+                2 => ItemCategory.Potion,
+                3 => ItemCategory.Spellbook,
+                4 => ItemCategory.HouseItem,
+                _ => null
+            };
+
+            if (category == null)
+            {
+                Console.WriteLine("Invalid category.");
+                return;
+            }
+
+            character.Inventory.GetItemsByCategory(category.Value);
         }
     }
 }
