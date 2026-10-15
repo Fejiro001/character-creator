@@ -14,5 +14,20 @@
             _inventory.AddItem(item);
             Console.WriteLine($"[Inventory]: {item.Name} was added to the inventory.");
         }
+
+        public void TakeItem(string itemName)
+        {
+            Item? itemFound = _inventory.FindItem(itemName);
+
+            if (itemFound != null)
+            {
+                _inventory.RemoveItem(itemFound);
+                Console.WriteLine($"\n[Inventory]: {itemFound.Name} was removed from the inventory.");
+            }
+            else
+            {
+                Console.WriteLine($"\nCould not find '{itemName}' in the inventory.");
+            }
+        }
     }
 }
