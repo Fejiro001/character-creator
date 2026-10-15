@@ -1,4 +1,5 @@
 ﻿using CharacterCreator.Characters;
+using CharacterCreator.Inventory;
 
 namespace CharacterCreator.Decorators
 {
@@ -19,6 +20,9 @@ namespace CharacterCreator.Decorators
             _character = character;
             Name = character.Name;
         }
+
+        // Delegates inventory access to the original character
+        public override InventoryFacade Inventory => _character.Inventory;
 
         public override void Act() => _character.Act();
 

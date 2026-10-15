@@ -1,4 +1,6 @@
-﻿namespace CharacterCreator.Characters
+﻿using CharacterCreator.Inventory;
+
+namespace CharacterCreator.Characters
 {
     // Product Class
     public abstract class Character
@@ -10,6 +12,7 @@
         public int Strength { get; set; }
         public int Intellect { get; set; }
         public int Agility { get; set; }
+        public virtual InventoryFacade Inventory { get; } = new InventoryFacade();
 
         protected Character(int health, int defense, int speed, int strength, int intellect, int agility)
         {
