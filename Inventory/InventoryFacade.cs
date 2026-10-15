@@ -65,5 +65,27 @@
                 Console.WriteLine($"- {item.Name}: {item.Description}");
             }
         }
+
+        public void DisplayInventory()
+        {
+            List<Item> items = _inventory.GetAllItems();
+            Console.WriteLine("\n=== Character Inventory ===");
+
+            if (items.Count == 0)
+            {
+                Console.WriteLine("Your inventory is empty.");
+                return;
+            }
+
+            foreach (Item item in items)
+            {
+                Console.WriteLine($"Name: {item.Name}");
+                Console.WriteLine($"Category: {item.Category}");
+                Console.WriteLine($"Description: {item.Description}");
+                Console.WriteLine("---------------------------------------------------");
+            }
+
+            Console.WriteLine($"Total items: {items.Count}\n");
+        }
     }
 }
