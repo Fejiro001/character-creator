@@ -40,6 +40,9 @@ namespace CharacterCreator
                     case CustomizeCharacterOption:
                         character = CustomizeCharacter(character);
                         break;
+                    case ViewCharacterOption:
+                        ViewCharacter(character);
+                        break;
                 }
             }
         }
@@ -153,6 +156,24 @@ namespace CharacterCreator
 
             Console.WriteLine($"{character.Name} has received a specialization.");
             return character;
+        }
+
+        static void ViewCharacter(Character? character)
+        {
+            if (character == null)
+            {
+                Console.WriteLine("Createe a character first.");
+                return;
+            }
+
+            Console.WriteLine("\n=== CHARACTER DETAILS ===");
+            character.PrintDetails();
+
+            Console.WriteLine("\n=== CHARACTER ACTION ===");
+            character.Act();
+
+            Console.WriteLine("\n=== CHARACTER SPEECH ===");
+            character.Speak();
         }
     }
 }
