@@ -45,7 +45,7 @@
         {
             Console.WriteLine("\n================== WORLD STATUS ==================");
             Console.WriteLine($" Region: {CurrentRegion}");
-            Console.WriteLine($" Day / Turn: {WorldTime}");
+            Console.WriteLine($" Day: {WorldTime}");
             Console.WriteLine($" Difficulty: {Difficulty}");
             Console.WriteLine($" Weather: {Weather}");
             Console.WriteLine("==================================================\n");

@@ -65,6 +65,7 @@ namespace CharacterCreator
         {
             Console.WriteLine("\n========= CHARACTER CREATOR SIMULATOR =========");
             Console.WriteLine("Main Menu");
+            Console.WriteLine("------------------------------------------------");
             Console.WriteLine("Select an option: ");
             Console.WriteLine("1. Create Character");
             Console.WriteLine("2. Customize Character");
@@ -72,7 +73,7 @@ namespace CharacterCreator
             Console.WriteLine("4. Manage Inventory");
             Console.WriteLine("5. World Simulation");
             Console.WriteLine("0. Exit");
-            Console.WriteLine("================================================");
+            Console.WriteLine("================================================\n");
         }
 
         static int ReadMenuChoice()
@@ -129,6 +130,8 @@ namespace CharacterCreator
                 return null;
             }
 
+            character.Name = name;
+
             Console.WriteLine($"{character.Name} the {character.GetType().Name} has been created.");
             return character;
         }
@@ -137,7 +140,7 @@ namespace CharacterCreator
         {
             if (character == null)
             {
-                Console.WriteLine("Createe a character first.");
+                Console.WriteLine("Create a character first.");
                 return null;
             }
 
@@ -176,7 +179,7 @@ namespace CharacterCreator
         {
             if (character == null)
             {
-                Console.WriteLine("Createe a character first.");
+                Console.WriteLine("Create a character first.");
                 return;
             }
 
@@ -194,7 +197,7 @@ namespace CharacterCreator
         {
             if (character == null)
             {
-                Console.WriteLine("Createe a character first.");
+                Console.WriteLine("Create a character first.");
                 return;
             }
 
