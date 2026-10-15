@@ -1,6 +1,7 @@
 ﻿using CharacterCreator.Characters;
 using CharacterCreator.Decorators;
 using CharacterCreator.Factories;
+using CharacterCreator.Inventory;
 
 namespace CharacterCreator
 {
@@ -174,6 +175,96 @@ namespace CharacterCreator
 
             Console.WriteLine("\n=== CHARACTER SPEECH ===");
             character.Speak();
+        }
+
+        static void ManageInventory(Character? character)
+        {
+            if (character == null)
+            {
+                Console.WriteLine("Createe a character first.");
+                return;
+            }
+
+            bool inventoryMenuRunning = true;
+
+            while (inventoryMenuRunning)
+            {
+                Console.WriteLine("\n=== INVENTORY MENU ===");
+                Console.WriteLine("Select an option:");
+                Console.WriteLine("1. Collect an Item");
+                Console.WriteLine("2. Use an Item");
+                Console.WriteLine("3. Search for Item");
+                Console.WriteLine("4. Filter Items by Category");
+                Console.WriteLine("5. Display Inventory");
+                Console.WriteLine("0. Return");
+
+                if (!int.TryParse(Console.ReadLine()?.Trim(), out int choice))
+                {
+                    Console.WriteLine("Invalid input. Please enter a number.");
+                    continue;
+                }
+
+                switch (choice)
+                {
+                    case 1:
+                        GiveInventoryItem(character);
+                        break;
+                    case 0:
+                        inventoryMenuRunning = false;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid option.");
+                        break;
+                }
+            }
+        }
+
+        // Add a new item to character inventory
+        static void GiveInventoryItem(Character character)
+        {
+            Console.WriteLine("Enter item name:");
+            string? name = Console.ReadLine()?.Trim();
+
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                Console.WriteLine("Item name cannot be empty.");
+                return;
+            }
+
+            Console.WriteLine("Categories: 1. Weapon\n 2. Potion\n 3. Spellbook\n 4. HouseItem\n");
+            Console.WriteLine("Choose a category:");
+
+            if (!int.TryParse(Console.ReadLine()?.Trim(), out int categoryChoice))
+            {
+                Console.WriteLine("Invalid category.");
+                return;
+            }
+
+            ItemCategory? category = categoryChoice switch
+            {
+                1 => ItemCategory.Weapon,
+                2 => ItemCategory.Potion,
+                3 => ItemCategory.Spellbook,
+                4 => ItemCategory.HouseItem,
+                _ => null
+            };
+
+            if (category == null)
+            {
+                Console.WriteLine("Invalid category.");
+                return;
+            }
+
+            Console.WriteLine("Enter item description:");
+            string? description = Console.ReadLine()?.Trim();
+
+            Item item = new Item(
+                name,
+                category.Value,
+                description ?? ""
+            );
+
+            character.Inventory.GiveItem(item);
         }
     }
 }
