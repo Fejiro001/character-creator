@@ -7,20 +7,11 @@
         public void AddItem(Item item)
         {
             _items.Add(item);
-            Console.WriteLine($"[Inventory] Added: {item.Name}");
         }
 
         public void RemoveItem(Item item)
         {
-            bool itemRemoved = _items.Remove(item);
-            if (itemRemoved)
-            {
-                Console.WriteLine($"[Inventory] Removed: {item.Name}");
-            }
-            else
-            {
-                Console.WriteLine($"[Inventory] Item not found: {item.Name}");
-            }
+            _items.Remove(item);
         }
 
         public Item? FindItem(string itemName)
