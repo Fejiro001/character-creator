@@ -209,6 +209,10 @@ namespace CharacterCreator
                     case 1:
                         GiveInventoryItem(character);
                         break;
+                    case 2:
+                        Console.WriteLine("Enter the item you want to use:");
+                        character.Inventory.TakeItem(Console.ReadLine() ?? "");
+                        break;
                     case 0:
                         inventoryMenuRunning = false;
                         break;
