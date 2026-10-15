@@ -29,5 +29,23 @@
                 Console.WriteLine($"\nCould not find '{itemName}' in the inventory.");
             }
         }
+
+
+        public void SearchItem(string itemName)
+        {
+            Item? itemFound = _inventory.FindItem(itemName);
+
+            if (itemFound != null)
+            {
+                Console.WriteLine("\n=== Item Found ===");
+                Console.WriteLine($"Name: {itemFound.Name}");
+                Console.WriteLine($"Category: {itemFound.Category}");
+                Console.WriteLine($"Description: {itemFound.Description}");
+            }
+            else
+            {
+                Console.WriteLine($"\n'{itemName}' was not found in the inventory.");
+            }
+        }
     }
 }
