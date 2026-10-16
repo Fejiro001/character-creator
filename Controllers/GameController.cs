@@ -60,7 +60,7 @@ namespace CharacterCreator.Controllers
             }
         }
 
-        static void DisplayMenu()
+        private void DisplayMenu()
         {
             Console.WriteLine("\n========= CHARACTER CREATOR SIMULATOR =========");
             Console.WriteLine("Main Menu");
@@ -75,7 +75,7 @@ namespace CharacterCreator.Controllers
             Console.WriteLine("================================================\n");
         }
 
-        static int ReadMenuChoice()
+        private int ReadMenuChoice()
         {
             Console.WriteLine("Select an option: ");
             string? input = Console.ReadLine()?.Trim();
@@ -88,7 +88,7 @@ namespace CharacterCreator.Controllers
             return -1;
         }
 
-        static Character? CreateCharacter()
+        private Character? CreateCharacter()
         {
             Console.WriteLine("\n=== CREATE CHARACTER ===");
             Console.WriteLine("Choose a character type:");
@@ -135,7 +135,7 @@ namespace CharacterCreator.Controllers
             return character;
         }
 
-        static Character? CustomizeCharacter(Character? character)
+        private Character? CustomizeCharacter(Character? character)
         {
             if (character == null)
             {
@@ -165,6 +165,7 @@ namespace CharacterCreator.Controllers
                     }
 
                     character = new WarriorDecorator(character);
+                    Console.WriteLine($"{character.Name} has received a Warrior specialization.");
                     break;
                 case 2:
                     if (HasSpecialization(character, typeof(MageDecorator)))
@@ -174,6 +175,7 @@ namespace CharacterCreator.Controllers
                     }
 
                     character = new MageDecorator(character);
+                    Console.WriteLine($"{character.Name} has received a Mage specialization.");
                     break;
                 case 0:
                     return character;
@@ -182,11 +184,10 @@ namespace CharacterCreator.Controllers
                     return character;
             }
 
-            Console.WriteLine($"{character.Name} has received a specialization.");
             return character;
         }
 
-        static void ViewCharacter(Character? character)
+        private void ViewCharacter(Character? character)
         {
             if (character == null)
             {
@@ -204,7 +205,7 @@ namespace CharacterCreator.Controllers
             character.Speak();
         }
 
-        static void ManageInventory(Character? character)
+        private void ManageInventory(Character? character)
         {
             if (character == null)
             {
@@ -238,11 +239,11 @@ namespace CharacterCreator.Controllers
                         break;
                     case 2:
                         Console.WriteLine("Enter the item you want to use:");
-                        character.Inventory.TakeItem(Console.ReadLine() ?? "");
+                        character.Inventory.TakeItem(Console.ReadLine()?.Trim() ?? "");
                         break;
                     case 3:
                         Console.WriteLine("Enter the item to search for:");
-                        character.Inventory.SearchItem(Console.ReadLine() ?? "");
+                        character.Inventory.SearchItem(Console.ReadLine()?.Trim() ?? "");
                         break;
                     case 4:
                         FilterInventory(character);
@@ -260,7 +261,7 @@ namespace CharacterCreator.Controllers
             }
         }
 
-        static void AddInventoryItem(Character character)
+        private void AddInventoryItem(Character character)
         {
             Console.WriteLine("Enter item name:");
             string? name = Console.ReadLine()?.Trim();
@@ -301,13 +302,13 @@ namespace CharacterCreator.Controllers
             Item item = new Item(
                 name,
                 category.Value,
-                description ?? "Anonymous Info"
+                description ?? "No description provided."
             );
 
             character.Inventory.GiveItem(item);
         }
 
-        static void FilterInventory(Character character)
+        private void FilterInventory(Character character)
         {
             Console.WriteLine("\nChoose a category:");
             Console.WriteLine("1. Weapon\n2. Potion\n3. Spellbook\n4. HouseItem\n");
@@ -336,7 +337,7 @@ namespace CharacterCreator.Controllers
             character.Inventory.GetItemsByCategory(category.Value);
         }
 
-        static void RunSimulation(Character? character, GameWorld gameWorld)
+        private void RunSimulation(Character? character, GameWorld gameWorld)
         {
             bool simulationRunning = true;
 
@@ -383,7 +384,7 @@ namespace CharacterCreator.Controllers
             }
         }
 
-        static bool HasSpecialization(Character character, Type specializationType)
+        private bool HasSpecialization(Character character, Type specializationType)
         {
             return character is CharacterDecorator decorator && decorator.HasSpecialization(specializationType);
         }
