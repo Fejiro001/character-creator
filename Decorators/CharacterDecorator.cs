@@ -27,5 +27,20 @@ namespace CharacterCreator.Decorators
         public override void Act() => _character.Act();
 
         public override void Speak() => _character.Speak();
+
+        public bool HasSpecialization(Type specializationType)
+        {
+            if (specializationType.IsInstanceOfType(this))
+            {
+                return true;
+            }
+
+            if (_character is CharacterDecorator decorator)
+            {
+                return decorator.HasSpecialization(specializationType);
+            }
+
+            return false;
+        }
     }
 }
