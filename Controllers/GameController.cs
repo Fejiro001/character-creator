@@ -299,10 +299,14 @@ namespace CharacterCreator.Controllers
             Console.WriteLine("Enter item description:");
             string? description = Console.ReadLine()?.Trim();
 
+            string itemDescription = string.IsNullOrWhiteSpace(description)
+                ? "No description provided."
+                : description;
+
             Item item = new Item(
                 name,
                 category.Value,
-                description ?? "No description provided."
+                itemDescription
             );
 
             character.Inventory.GiveItem(item);
