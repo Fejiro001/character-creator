@@ -159,9 +159,21 @@ namespace CharacterCreator
             switch (choice)
             {
                 case 1:
+                    if (HasSpecialization(character, typeof(WarriorDecorator)))
+                    {
+                        Console.WriteLine("This character already has the Warrior specialization.");
+                        return character;
+                    }
+
                     character = new WarriorDecorator(character);
                     break;
                 case 2:
+                    if (HasSpecialization(character, typeof(MageDecorator)))
+                    {
+                        Console.WriteLine("This character already has the Mage specialization.");
+                        return character;
+                    }
+
                     character = new MageDecorator(character);
                     break;
                 case 0:
@@ -223,7 +235,7 @@ namespace CharacterCreator
                 switch (choice)
                 {
                     case 1:
-                        GiveInventoryItem(character);
+                        AddInventoryItem(character);
                         break;
                     case 2:
                         Console.WriteLine("Enter the item you want to use:");
@@ -249,8 +261,7 @@ namespace CharacterCreator
             }
         }
 
-        // Add a new item to character inventory
-        static void GiveInventoryItem(Character character)
+        static void AddInventoryItem(Character character)
         {
             Console.WriteLine("Enter item name:");
             string? name = Console.ReadLine()?.Trim();
@@ -261,8 +272,8 @@ namespace CharacterCreator
                 return;
             }
 
-            Console.WriteLine("Categories: 1. Weapon\n 2. Potion\n 3. Spellbook\n 4. HouseItem\n");
-            Console.WriteLine("Choose a category:");
+            Console.WriteLine("\nChoose a category:");
+            Console.WriteLine("1. Weapon\n2. Potion\n3. Spellbook\n4. HouseItem\n");
 
             if (!int.TryParse(Console.ReadLine()?.Trim(), out int categoryChoice))
             {
@@ -291,7 +302,7 @@ namespace CharacterCreator
             Item item = new Item(
                 name,
                 category.Value,
-                description ?? ""
+                description ?? "Anonymous Info"
             );
 
             character.Inventory.GiveItem(item);
@@ -299,8 +310,8 @@ namespace CharacterCreator
 
         static void FilterInventory(Character character)
         {
-            Console.WriteLine("Categories: 1. Weapon\n 2. Potion\n 3. Spellbook\n 4. HouseItem\n");
-            Console.WriteLine("Choose a category:");
+            Console.WriteLine("\nChoose a category:");
+            Console.WriteLine("1. Weapon\n2. Potion\n3. Spellbook\n4. HouseItem\n");
 
             if (!int.TryParse(Console.ReadLine()?.Trim(), out int choice))
             {
@@ -371,6 +382,11 @@ namespace CharacterCreator
                         break;
                 }
             }
+        }
+
+        static bool HasSpecialization(Character character, Type specializationType)
+        {
+            return character is CharacterDecorator decorator && decorator.HasSpecialization(specializationType);
         }
     }
 }
