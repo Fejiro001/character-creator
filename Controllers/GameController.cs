@@ -31,7 +31,11 @@ namespace CharacterCreator.Controllers
                 switch (choice)
                 {
                     case CreateCharacterOption:
-                        character = CreateCharacter();
+                        Character? newCharacter = CreateCharacter();
+                        if (newCharacter != null)
+                        {
+                            character = newCharacter;
+                        }
                         break;
                     case CustomizeCharacterOption:
                         character = CustomizeCharacter(character);
