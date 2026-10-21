@@ -90,11 +90,14 @@ namespace CharacterCreator.Controllers
 
         private Character? CreateCharacter()
         {
+            string color = string.Empty;
+
             Console.WriteLine("\n=== CREATE CHARACTER ===");
             Console.WriteLine("Choose a character type:");
             Console.WriteLine("1. Human");
             Console.WriteLine("2. Elf");
             Console.WriteLine("3. Dwarf");
+            Console.WriteLine("4. Splorg");
 
             if (!int.TryParse(Console.ReadLine()?.Trim(), out int choice))
             {
@@ -102,23 +105,11 @@ namespace CharacterCreator.Controllers
                 return null;
             }
 
-            // Used a switch expression
-            CharacterFactory? factory = choice switch
-            {
-                1 => new HumanFactory(),
-                2 => new ElfFactory(),
-                3 => new DwarfFactory(),
-                _ => null
-            };
-
-            if (factory == null)
+            if (choice < 1 || choice > 4)
             {
                 Console.WriteLine("Invalid character type.");
                 return null;
             }
-
-            // Using the character factory
-            Character character = factory.CreateCharacter();
 
             Console.WriteLine("Enter your character's name:");
             string? name = Console.ReadLine()?.Trim();
@@ -129,9 +120,46 @@ namespace CharacterCreator.Controllers
                 return null;
             }
 
+            if (choice == 4)
+            {
+                Console.WriteLine("Enter your Splorg's color (Red, Green, Blue):");
+                string? enteredColor = Console.ReadLine()?.Trim();
+
+                color = enteredColor?.ToLowerInvariant() switch
+                {
+                    "red" => "Red",
+                    "green" => "Green",
+                    "blue" => "Blue",
+                    _ => string.Empty
+                };
+
+                if (string.IsNullOrWhiteSpace(color))
+                {
+                    Console.WriteLine("Invalid color. Character creation cancelled.");
+                    return null;
+                }
+            }
+
+            // Used a switch expression
+            CharacterFactory? factory = choice switch
+            {
+                1 => new HumanFactory(),
+                2 => new ElfFactory(),
+                3 => new DwarfFactory(),
+                4 => new SplorgFactory(name, color),
+                _ => throw new InvalidOperationException("Invalid character type.")
+            };
+
+            // Using the character factory
+            Character character = factory.CreateCharacter();
+
             character.Name = name;
 
-            Console.WriteLine($"{character.Name} the {character.GetType().Name} has been created.");
+            string characterType = choice == 4
+                ? "Splorg"
+                : character.GetType().Name;
+
+            Console.WriteLine($"{character.Name} the {characterType} has been created.");
             return character;
         }
 
