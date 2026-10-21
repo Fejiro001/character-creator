@@ -1,4 +1,4 @@
-﻿namespace Artifact_Legacy_Code
+﻿namespace CharacterCreator.Legacy
 {
     public class Splorg
     {
@@ -34,7 +34,7 @@
         }
         public void InitializeSplorg(string color)
         {
-            switch(color)
+            switch (color)
             {
                 case "Red":
                     CreateRedSplorg();
@@ -58,8 +58,8 @@
             BubbleDurability += 2;
             Luck -= 2;
         }
-        public void CreateGreenSplorg() 
-        { 
+        public void CreateGreenSplorg()
+        {
             Luck += 2;
             Speed += 2;
             BubbleDurability -= 2;
@@ -75,7 +75,7 @@
         {
             Console.WriteLine(Description);
         }
-        public string Communicate() 
+        public string Communicate()
         {
             int index = rng.Next(splorgSounds.Length);
             return splorgSounds[index];
