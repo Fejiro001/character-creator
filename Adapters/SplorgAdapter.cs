@@ -27,5 +27,14 @@ namespace CharacterCreator.Adapters
             _splorg = splorg;
             Name = splorg.Name;
         }
+        public override void Act()
+        {
+            _splorg.SplorgAction();
+        }
+
+        public override void Speak()
+        {
+            Console.WriteLine(_splorg.Communicate());
+        }
     }
 }
