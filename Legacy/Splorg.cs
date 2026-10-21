@@ -1,4 +1,4 @@
-﻿namespace CharacterCreator.Legacy
+﻿namespace Artifact_Legacy_Code
 {
     public class Splorg
     {
